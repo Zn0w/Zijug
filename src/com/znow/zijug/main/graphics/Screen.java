@@ -24,14 +24,6 @@ public class Screen {
 	private long window;
 	
 	public Screen(int width, int height, String title) {
-		// Setup an error callback. The default implementation
-		// will print the error message in System.err.
-		GLFWErrorCallback.createPrint(System.err).set();
-
-		// Initialize GLFW. Most GLFW functions will not work before doing this.
-		if ( !glfwInit() )
-			throw new IllegalStateException("Unable to initialize GLFW");
-
 		// Configure GLFW
 		glfwDefaultWindowHints(); // optional, the current window hints are already the default
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
@@ -71,9 +63,18 @@ public class Screen {
 		glfwMakeContextCurrent(window);
 		// Enable v-sync
 		glfwSwapInterval(1);
-
-		// Make the window visible
+	}
+	
+	public void setVisible() {
 		glfwShowWindow(window);
+	}
+	
+	public void setHidden() {
+		glfwHideWindow(window);
+	}
+	
+	public boolean isVisible() {
+		return glfwGetWindowAttrib(window, GLFW_VISIBLE) == 1;
 	}
 	
 }
