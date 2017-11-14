@@ -25,6 +25,10 @@ import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
 import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -95,6 +99,10 @@ public class Screen implements Runnable {
 		renderer = new Renderer();
 		
 		screens.add(this);
+		
+		setVisible();
+		
+		startScreenThread();
 	}
 	
 	public Screen(int width, int height, String title, boolean resizable, int xWindowPos, int yWindowPos) {
@@ -130,6 +138,10 @@ public class Screen implements Runnable {
 		renderer = new Renderer();
 		
 		screens.add(this);
+		
+		setVisible();
+		
+		startScreenThread();
 	}
 	
 	public void dispose() {
@@ -154,16 +166,33 @@ public class Screen implements Runnable {
 		return glfwGetWindowAttrib(window, GLFW_VISIBLE) == 1;
 	}
 	
+	public void startScreenThread() {
+		//Thread screenThread = new Thread(this);
+		//screenThread.start();
+		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		
+		while (!glfwWindowShouldClose(window)) {
+			//renderer.prepare();
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+			
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+		}
+	}
+	
 	@Override
 	public void run() {
-		MemoryStack stack = stackPush();
+		/*MemoryStack stack = stackPush();
 		IntBuffer width = stack.mallocInt(1);
 		IntBuffer height = stack.mallocInt(1);
 		glfwGetWindowSize(window, width, height);
-		renderer.init(width.get(0), height.get(0));
+		renderer.init(width.get(0), height.get(0));*/
+		
+		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 		
 		while (!glfwWindowShouldClose(window)) {
-			renderer.prepare();
+			//renderer.prepare();
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 			
 			glfwSwapBuffers(window);
 			glfwPollEvents();
