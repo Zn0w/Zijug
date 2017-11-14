@@ -1,6 +1,8 @@
 package com.znow.zijug.main.core;
 
 import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 
@@ -14,6 +16,11 @@ public class FlowController {
 		// Initialize GLFW. Most GLFW functions will not work before doing this.
 		if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
+	}
+	
+	public static void terminate() {
+		glfwTerminate();
+		glfwSetErrorCallback(null).free();
 	}
 	
 }
