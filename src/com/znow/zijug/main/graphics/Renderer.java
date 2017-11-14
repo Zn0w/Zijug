@@ -5,6 +5,8 @@ import static org.lwjgl.opengl.GL11.*;
 class Renderer {
 	
 	void init(int windowWidth, int windowHeight) {
+		System.out.println("Width: " + windowWidth + "    Height: " + windowHeight);
+		
 		glMatrixMode(GL_PROJECTION);
 		glOrtho(0, 0, windowWidth, windowHeight, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
