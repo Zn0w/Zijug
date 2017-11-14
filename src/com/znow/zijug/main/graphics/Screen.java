@@ -22,6 +22,10 @@ import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
 import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
 import static org.lwjgl.glfw.GLFW.glfwWindowHint;
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -34,11 +38,12 @@ import org.lwjgl.system.MemoryStack;
 
 import com.znow.zijug.main.core.FlowController;
 
-public class Screen {
+public class Screen implements Runnable {
 	
 	private List<Screen> screens = new ArrayList<Screen>();
 	
 	private long window;
+	private Renderer renderer;
 	
 	public Screen(int width, int height, String title, boolean resizable) {
 		if (screens.size() == 0)
@@ -88,6 +93,8 @@ public class Screen {
 		// Enable v-sync
 		glfwSwapInterval(1);
 		
+		renderer = new Renderer();
+		
 		screens.add(this);
 	}
 	
@@ -121,6 +128,8 @@ public class Screen {
 		// Enable v-sync
 		glfwSwapInterval(1);
 		
+		renderer = new Renderer();
+		
 		screens.add(this);
 	}
 	
@@ -144,6 +153,13 @@ public class Screen {
 	
 	public boolean isVisible() {
 		return glfwGetWindowAttrib(window, GLFW_VISIBLE) == 1;
+	}
+	
+	@Override
+	public void run() {
+		while (!glfwWindowShouldClose(window)) {
+			
+		}
 	}
 	
 }
