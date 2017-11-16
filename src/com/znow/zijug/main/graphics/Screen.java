@@ -167,17 +167,17 @@ public class Screen implements Runnable {
 	}
 	
 	public void startScreenThread() {
-		//Thread screenThread = new Thread(this);
-		//screenThread.start();
-		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		Thread screenThread = new Thread(this);
+		screenThread.start();
+		//glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 		
-		while (!glfwWindowShouldClose(window)) {
+		/*while (!glfwWindowShouldClose(window)) {
 			//renderer.prepare();
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 			
 			glfwSwapBuffers(window);
 			glfwPollEvents();
-		}
+		}*/
 	}
 	
 	@Override
@@ -188,11 +188,11 @@ public class Screen implements Runnable {
 		glfwGetWindowSize(window, width, height);
 		renderer.init(width.get(0), height.get(0));*/
 		
-		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		//glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 		
 		while (!glfwWindowShouldClose(window)) {
 			//renderer.prepare();
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 			
 			glfwSwapBuffers(window);
 			glfwPollEvents();
