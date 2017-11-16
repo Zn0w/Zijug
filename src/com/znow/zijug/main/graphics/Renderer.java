@@ -11,10 +11,10 @@ class Renderer {
 		glOrtho(0, 0, windowWidth, windowHeight, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_TEXTURE_2D);
+		glClearColor(1, 1, 1, 1);
 	}
 	
 	void prepare() {
-		glClearColor(1, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	

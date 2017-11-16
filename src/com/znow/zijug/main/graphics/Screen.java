@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
 import com.znow.zijug.main.core.FlowController;
@@ -91,10 +92,11 @@ public class Screen implements Runnable {
 			);
 		} // the stack frame is popped automatically
 
-		// Make the OpenGL context current
-		glfwMakeContextCurrent(window);
 		// Enable v-sync
 		glfwSwapInterval(1);
+		
+		glfwMakeContextCurrent(window);
+		GL.createCapabilities(); // Turns OpenGL on
 		
 		renderer = new Renderer();
 		
@@ -130,10 +132,11 @@ public class Screen implements Runnable {
 
 		glfwSetWindowPos(window, xWindowPos, yWindowPos);
 
-		// Make the OpenGL context current
-		glfwMakeContextCurrent(window);
 		// Enable v-sync
 		glfwSwapInterval(1);
+		
+		glfwMakeContextCurrent(window);
+		GL.createCapabilities(); // Turns OpenGL on
 		
 		renderer = new Renderer();
 		
@@ -167,13 +170,15 @@ public class Screen implements Runnable {
 	}
 	
 	public void startScreenThread() {
-		Thread screenThread = new Thread(this);
-		screenThread.start();
-		//glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		Thread thread = new Thread(this);
+		thread.start();
 		
-		/*while (!glfwWindowShouldClose(window)) {
-			//renderer.prepare();
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+		/*GL.createCapabilities();
+		
+		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		
+		while (!glfwWindowShouldClose(window)) {
+			renderer.prepare();
 			
 			glfwSwapBuffers(window);
 			glfwPollEvents();
@@ -182,17 +187,17 @@ public class Screen implements Runnable {
 	
 	@Override
 	public void run() {
-		/*MemoryStack stack = stackPush();
+		glfwMakeContextCurrent(window);
+		GL.createCapabilities(); // Turns OpenGL on
+		
+		MemoryStack stack = stackPush();
 		IntBuffer width = stack.mallocInt(1);
 		IntBuffer height = stack.mallocInt(1);
 		glfwGetWindowSize(window, width, height);
-		renderer.init(width.get(0), height.get(0));*/
-		
-		//glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		renderer.init(width.get(0), height.get(0));
 		
 		while (!glfwWindowShouldClose(window)) {
-			//renderer.prepare();
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+			renderer.prepare();
 			
 			glfwSwapBuffers(window);
 			glfwPollEvents();
