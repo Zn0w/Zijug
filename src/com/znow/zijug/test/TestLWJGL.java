@@ -93,6 +93,11 @@ public class TestLWJGL {
 		// creates the GLCapabilities instance and makes the OpenGL
 		// bindings available for use.
 		GL.createCapabilities();
+		
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity(); // Resets any previous projection matrices
+		glOrtho(0, 300, 300, 0, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
 
 		// Set the clear color
 		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
@@ -101,7 +106,15 @@ public class TestLWJGL {
 		// the window or has pressed the ESCAPE key.
 		while ( !glfwWindowShouldClose(window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
+			
+			glBegin(GL_QUADS);
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glVertex2i(50, 50);
+			glVertex2i(150, 50);
+			glVertex2i(150, 150);
+			glVertex2i(50, 150);
+			glEnd();
+			
 			glfwSwapBuffers(window); // swap the color buffers
 
 			// Poll for window events. The key callback above will only be

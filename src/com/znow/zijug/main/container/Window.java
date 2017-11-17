@@ -1,13 +1,14 @@
 package com.znow.zijug.main.container;
 
+import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
+import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
+
 import java.nio.IntBuffer;
 
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
-import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
-import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
-
+import com.znow.zijug.main.component.Component;
 import com.znow.zijug.main.graphics.Renderer;
 
 public class Window extends Container {
@@ -25,8 +26,12 @@ public class Window extends Container {
 		renderer.init(width.get(0), height.get(0));
 	}
 	
+	@Override
 	public void update() {
 		renderer.prepare();
+		for (Component component : components) {
+			component.update();
+		}
 	}
 	
 }
