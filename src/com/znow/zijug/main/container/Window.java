@@ -1,7 +1,6 @@
 package com.znow.zijug.main.container;
 
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
-import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 
 import java.nio.IntBuffer;
 
@@ -16,7 +15,6 @@ public class Window extends Container {
 	private Renderer renderer = new Renderer();
 	
 	public Window(long glfwWindow) {
-		glfwMakeContextCurrent(glfwWindow);
 		GL.createCapabilities(); // Turns OpenGL on
 		
 		MemoryStack stack = MemoryStack.stackPush();

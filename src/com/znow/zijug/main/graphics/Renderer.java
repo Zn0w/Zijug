@@ -8,10 +8,10 @@ public class Renderer {
 		System.out.println("Width: " + windowWidth + "    Height: " + windowHeight);
 		
 		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, 0, windowWidth, windowHeight, 1, -1);
-		//glMatrixMode(GL_MODELVIEW);
-		//glEnable(GL_TEXTURE_2D);
+		glLoadIdentity(); // Resets any previous projection matrices
+		glOrtho(0, windowWidth, windowHeight, 0, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
+		
 		glClearColor(0, 1, 1, 1);
 	}
 	

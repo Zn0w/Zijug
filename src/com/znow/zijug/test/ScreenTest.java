@@ -69,7 +69,7 @@ public class ScreenTest {
 
 		while ( !glfwWindowShouldClose(window) ) {
 			testingWindow.update();
-
+			
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
