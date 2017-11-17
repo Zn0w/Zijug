@@ -7,7 +7,7 @@ import com.znow.zijug.main.component.Component;
 
 public abstract class Container extends Component {
 	
-	private List<Component> components = new ArrayList<Component>();
+	protected List<Component> components = new ArrayList<Component>();
 	
 	public void add(Component component) {
 		components.add(component);

@@ -2,9 +2,9 @@ package com.znow.zijug.main.graphics;
 
 import static org.lwjgl.opengl.GL11.*;
 
-class Renderer {
+public class Renderer {
 	
-	void init(int windowWidth, int windowHeight) {
+	public void init(int windowWidth, int windowHeight) {
 		System.out.println("Width: " + windowWidth + "    Height: " + windowHeight);
 		
 		glMatrixMode(GL_PROJECTION);
@@ -14,7 +14,7 @@ class Renderer {
 		glClearColor(1, 1, 1, 1);
 	}
 	
-	void prepare() {
+	public void prepare() {
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
