@@ -31,7 +31,9 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 import java.nio.IntBuffer;
 
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 
@@ -42,6 +44,8 @@ import com.znow.zijug.main.container.Window;
 public class ScreenTest {
 	
 	private long window;
+	
+	private GLFWKeyCallback keyboardHandler = new KeyboardHandler();
 	
 	public static void main(String[] args) {
 		new ScreenTest().run();
@@ -66,9 +70,17 @@ public class ScreenTest {
 		Button helloButton = new Button(50, 80, 40, 25, "Hello Button!");
 		
 		testingWindow.add(helloButton);
+		glfwSetKeyCallback(window, keyboardHandler);
 
 		while ( !glfwWindowShouldClose(window) ) {
 			testingWindow.update();
+			
+			if (KeyboardHandler.isKeyDown(GLFW.GLFW_KEY_F)) {
+				System.out.println("Key is pressed!");
+				helloButton.setHeight(150);
+				helloButton.setWidth(1200);
+				testingWindow.pack(window);
+			}
 			
 			glfwSwapBuffers(window);
 			glfwPollEvents();

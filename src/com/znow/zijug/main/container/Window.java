@@ -4,6 +4,7 @@ import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 
 import java.nio.IntBuffer;
 
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
@@ -30,6 +31,22 @@ public class Window extends Container {
 		for (Component component : components) {
 			component.update();
 		}
+	}
+	
+	public void pack(long glfwWindow) {
+		int sumWidth = 0;
+		int sumHeight = 0;
+		
+		for (Component component : components) {
+			sumWidth += component.getWidth();
+			sumHeight += component.getHeight();
+		}
+		
+		width = sumWidth;
+		height = sumHeight;
+		
+		GLFW.glfwSetWindowSize(glfwWindow, width, height);
+		renderer.init(width, height);
 	}
 	
 }
