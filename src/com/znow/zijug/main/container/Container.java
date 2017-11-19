@@ -13,6 +13,14 @@ public abstract class Container extends Component {
 		components.add(component);
 	}
 	
+	public void remove(Component component) {
+		components.remove(component);
+	}
+	
+	public void removeAll() {
+		components.removeAll(components);
+	}
+	
 	List<Component> getComponents() {
 		return components;
 	}
