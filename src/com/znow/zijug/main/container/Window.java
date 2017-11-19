@@ -38,6 +38,15 @@ public class Window extends Container {
 		int sumHeight = 0;
 		
 		for (Component component : components) {
+			if (component instanceof Container) {
+				for (Component c : ((Container) component).getComponents()) {
+					sumWidth += c.getWidth();
+					sumHeight += c.getHeight();
+				}
+				
+				continue;
+			}
+			
 			sumWidth += component.getWidth();
 			sumHeight += component.getHeight();
 		}

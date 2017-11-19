@@ -13,4 +13,8 @@ public abstract class Container extends Component {
 		components.add(component);
 	}
 	
+	List<Component> getComponents() {
+		return components;
+	}
+	
 }

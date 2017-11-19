@@ -38,6 +38,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 
 import com.znow.zijug.main.component.Button;
+import com.znow.zijug.main.container.Panel;
 import com.znow.zijug.main.container.Window;
 
 
@@ -69,7 +70,10 @@ public class ScreenTest {
 		
 		Button helloButton = new Button(50, 80, 40, 25, "Hello Button!");
 		
-		testingWindow.add(helloButton);
+		Panel panel = new Panel();
+		
+		panel.add(helloButton);
+		testingWindow.add(panel);
 		glfwSetKeyCallback(window, keyboardHandler);
 
 		while ( !glfwWindowShouldClose(window) ) {
