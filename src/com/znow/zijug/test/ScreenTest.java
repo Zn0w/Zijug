@@ -38,6 +38,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 
 import com.znow.zijug.main.component.Button;
+import com.znow.zijug.main.container.ContainerLayout;
 import com.znow.zijug.main.container.Panel;
 import com.znow.zijug.main.container.Window;
 
@@ -68,12 +69,19 @@ public class ScreenTest {
 	private void loop() {
 		Window testingWindow = new Window(window);
 		
-		Button helloButton = new Button(50, 80, 40, 25, "Hello Button!");
+		Button helloButton = new Button("Hello Button!");
+		Button test1 = new Button("Test 1");
+		Button test2 = new Button("Test 2");
 		
 		Panel panel = new Panel();
+		panel.setLayout(ContainerLayout.FLAT);
+		
 		panel.add(helloButton);
+		panel.add(test1);
+		panel.add(test2);
 		
 		testingWindow.add(panel);
+		//testingWindow.pack(window);
 		glfwSetKeyCallback(window, keyboardHandler);
 
 		while ( !glfwWindowShouldClose(window) ) {
