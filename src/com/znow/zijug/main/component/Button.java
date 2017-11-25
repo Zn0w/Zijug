@@ -6,6 +6,11 @@ public class Button extends Component {
 
 	private String title;
 	
+	public Button(String title) {
+		super(35, 25);
+		this.title = title;
+	}
+	
 	public Button(int x, int y, int width, int height, String title) {
 		super(x, y, width, height);
 		this.title = title;
@@ -29,6 +34,14 @@ public class Button extends Component {
 		glEnd();
 		
 		System.out.println("Done.");
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getTitle() {
+		return title;
 	}
 	
 }
