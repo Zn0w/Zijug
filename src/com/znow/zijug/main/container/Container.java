@@ -10,6 +10,7 @@ public abstract class Container extends Component {
 	protected List<Component> components = new ArrayList<Component>();
 	protected ContainerLayout layout;
 	protected int xMargin = 5, yMargin = 5;
+	protected int totalWidth, totalHeight;
 	
 	public void add(Component component) {
 		if (layout == ContainerLayout.FLAT && !components.isEmpty())
@@ -42,7 +43,8 @@ public abstract class Container extends Component {
 	}
 	
 	private void sortList(Component c1, Component c2) {
-		
+		c2.setX(c1.getX());
+		c2.setY(c1.getY() + c2.getHeight() + 5);
 	}
 	
 }
