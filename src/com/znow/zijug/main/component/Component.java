@@ -4,6 +4,10 @@ public abstract class Component {
 	
 	protected int x = 0, y = 0, width = 0, height = 0;
 	
+	public Component() {
+		
+	}
+	
 	public Component(int width, int height) {
 		this.width = width;
 		this.height = height;

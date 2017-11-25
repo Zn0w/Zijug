@@ -71,8 +71,8 @@ public class ScreenTest {
 		Button helloButton = new Button(50, 80, 40, 25, "Hello Button!");
 		
 		Panel panel = new Panel();
-		
 		panel.add(helloButton);
+		
 		testingWindow.add(panel);
 		glfwSetKeyCallback(window, keyboardHandler);
 
