@@ -18,7 +18,9 @@ public abstract class Container extends Component {
 		else if (layout == ContainerLayout.LIST && !components.isEmpty())
 			sortList(components.get(components.size() - 1), component);
 		
-		// I'm going to do something about that P.S. This piece of code is for window.pack() function
+		// I'm going to do something about that 
+		//P.S. This piece of code is for window.pack() function
+		
 		/*if (component instanceof Container) {
 			if(layout == ContainerLayout.FLAT) {
 				totalWidth += ((Container) component).totalWidth + xMargin;

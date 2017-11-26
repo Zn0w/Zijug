@@ -1,4 +1,4 @@
-package com.znow.zijug.test;
+package com.znow.zijug.test.button;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
@@ -37,20 +37,19 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 
+import com.znow.zijug.main.component.button.ActionHandler;
 import com.znow.zijug.main.component.button.Button;
-import com.znow.zijug.main.container.ContainerLayout;
-import com.znow.zijug.main.container.Panel;
 import com.znow.zijug.main.container.Window;
+import com.znow.zijug.test.KeyboardHandler;
 
-
-public class ScreenTest {
+public class ButtonTest {
 	
-	private long window;
+private long window;
 	
 	private GLFWKeyCallback keyboardHandler = new KeyboardHandler();
 	
 	public static void main(String[] args) {
-		new ScreenTest().run();
+		new ButtonTest().run();
 	}
 	
 	public void run() {
@@ -70,17 +69,9 @@ public class ScreenTest {
 		Window testingWindow = new Window(window);
 		
 		Button helloButton = new Button("Hello Button!");
-		Button test1 = new Button("Test 1");
-		Button test2 = new Button("Test 2");
-		
-		Panel panel = new Panel();
-		testingWindow.setLayout(ContainerLayout.FLAT);
+		helloButton.addActionHandler(new HelloHandler());
 		
 		testingWindow.add(helloButton);
-		testingWindow.add(test1);
-		testingWindow.add(test2);
-		
-		testingWindow.add(panel);
 		glfwSetKeyCallback(window, keyboardHandler);
 
 		while ( !glfwWindowShouldClose(window) ) {
@@ -149,6 +140,15 @@ public class ScreenTest {
 
 		// Make the window visible
 		glfwShowWindow(window);
+	}
+	
+	private class HelloHandler implements ActionHandler {
+
+		@Override
+		public void onAction() {
+			System.out.println("Hello button is pressed!");
+		}
+		
 	}
 	
 }

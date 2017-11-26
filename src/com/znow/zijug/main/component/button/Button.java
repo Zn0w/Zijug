@@ -1,10 +1,13 @@
-package com.znow.zijug.main.component;
+package com.znow.zijug.main.component.button;
 
 import static org.lwjgl.opengl.GL11.*;
+
+import com.znow.zijug.main.component.Component;
 
 public class Button extends Component {
 
 	private String title;
+	private ActionHandler actionHandler;
 	
 	public Button(String title) {
 		super(35, 25);
@@ -19,12 +22,11 @@ public class Button extends Component {
 	@Override
 	public void update() {
 		draw();
-		System.out.println("Button " + title + " update.");
+		if (isClicked() && actionHandler != null)
+			actionHandler.onAction();
 	}
 	
 	private void draw() {
-		System.out.println("Draw button.");
-		
 		glBegin(GL_QUADS);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		glVertex2i(x, y);
@@ -32,8 +34,10 @@ public class Button extends Component {
 		glVertex2i(x + width, y + height);
 		glVertex2i(x, y + height);
 		glEnd();
-		
-		System.out.println("Done.");
+	}
+	
+	private boolean isClicked() {
+		return true;
 	}
 	
 	public void setTitle(String title) {
@@ -42,6 +46,10 @@ public class Button extends Component {
 	
 	public String getTitle() {
 		return title;
+	}
+	
+	public void addActionHandler(ActionHandler actionHandler) {
+		this.actionHandler = actionHandler;
 	}
 	
 }
