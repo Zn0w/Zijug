@@ -34,28 +34,8 @@ public class Window extends Container {
 	}
 	
 	public void pack(long glfwWindow) {
-		int sumWidth = 0;
-		int sumHeight = 0;
-		
-		for (Component component : components) {
-			if (component instanceof Container) {
-				for (Component c : ((Container) component).getComponents()) {
-					sumWidth += c.getWidth();
-					sumHeight += c.getHeight();
-				}
-				
-				continue;
-			}
-			
-			sumWidth += component.getWidth();
-			sumHeight += component.getHeight();
-		}
-		
-		width = sumWidth;
-		height = sumHeight;
-		
-		GLFW.glfwSetWindowSize(glfwWindow, width, height);
-		renderer.init(width, height);
+		GLFW.glfwSetWindowSize(glfwWindow, totalWidth, totalHeight);
+		renderer.init(totalWidth, totalHeight);
 	}
 	
 }

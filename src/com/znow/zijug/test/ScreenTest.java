@@ -74,14 +74,13 @@ public class ScreenTest {
 		Button test2 = new Button("Test 2");
 		
 		Panel panel = new Panel();
-		panel.setLayout(ContainerLayout.FLAT);
+		testingWindow.setLayout(ContainerLayout.FLAT);
 		
-		panel.add(helloButton);
-		panel.add(test1);
-		panel.add(test2);
+		testingWindow.add(helloButton);
+		testingWindow.add(test1);
+		testingWindow.add(test2);
 		
 		testingWindow.add(panel);
-		//testingWindow.pack(window);
 		glfwSetKeyCallback(window, keyboardHandler);
 
 		while ( !glfwWindowShouldClose(window) ) {
