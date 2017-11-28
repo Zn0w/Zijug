@@ -5,6 +5,7 @@ import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.glfw.GLFW.glfwGetMouseButton;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
+import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
 import java.nio.DoubleBuffer;
 
@@ -18,6 +19,7 @@ public class Button extends Component {
 	private String title;
 	private ActionHandler actionHandler;
 	private long glfwWindow;
+	private boolean mouseIsPressed;
 	
 	public Button(String title) {
 		super(35, 25);
@@ -47,7 +49,9 @@ public class Button extends Component {
 	}
 	
 	private boolean isClicked() {
-		if (glfwGetMouseButton(glfwWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+		if (glfwGetMouseButton(glfwWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE && mouseIsPressed) {
+			mouseIsPressed = false;
+			
 			MemoryStack stack = stackPush();
 			DoubleBuffer xpos = stack.mallocDouble(1);
 			DoubleBuffer ypos = stack.mallocDouble(1);
@@ -56,8 +60,11 @@ public class Button extends Component {
 			
 			return (x <= xpos.get(0) && x + width >= xpos.get(0)) && (y <= ypos.get(0) && y + height >= ypos.get(0));
 		}
-		else
-			return false;
+		else {
+			if (glfwGetMouseButton(glfwWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+				mouseIsPressed = true;
+		}
+		return false;
 	}
 	
 	public void setTitle(String title) {
