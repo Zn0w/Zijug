@@ -2,6 +2,9 @@ package com.znow.zijug.main.component.button;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
+import static org.lwjgl.glfw.GLFW.glfwGetMouseButton;
+import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 
 import java.nio.DoubleBuffer;
 
@@ -44,12 +47,17 @@ public class Button extends Component {
 	}
 	
 	private boolean isClicked() {
-		MemoryStack stack = stackPush();
-		DoubleBuffer xpos = stack.mallocDouble(1);
-		DoubleBuffer ypos = stack.mallocDouble(1);
-		GLFW.glfwGetCursorPos(glfwWindow, xpos, ypos);
-		
-		return (x <= xpos.get(0) && x + width >= xpos.get(0)) && (y <= ypos.get(0) && y + height >= ypos.get(0));
+		if (glfwGetMouseButton(glfwWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+			MemoryStack stack = stackPush();
+			DoubleBuffer xpos = stack.mallocDouble(1);
+			DoubleBuffer ypos = stack.mallocDouble(1);
+			GLFW.glfwGetCursorPos(glfwWindow, xpos, ypos);
+			System.out.println("X: " + xpos.get(0) + "    Y: " + ypos.get(0));
+			
+			return (x <= xpos.get(0) && x + width >= xpos.get(0)) && (y <= ypos.get(0) && y + height >= ypos.get(0));
+		}
+		else
+			return false;
 	}
 	
 	public void setTitle(String title) {

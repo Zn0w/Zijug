@@ -18,6 +18,7 @@ import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
@@ -50,6 +51,7 @@ import com.znow.zijug.main.container.Window;
 public class ButtonTest {
 	
 	private long window;
+	private GLFWCursorPosCallback cursorHandler;
 	private GLFWMouseButtonCallback mouseButtonHandler;
 	
 	public static void main(String[] args) {
@@ -117,6 +119,7 @@ public class ButtonTest {
 				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		});
 		
+		glfwSetCursorPosCallback(window, cursorHandler = new CursorHandler());
 		glfwSetMouseButtonCallback(window, mouseButtonHandler = new MouseButtonHandler());
 		
 		// Get the thread stack and push a new frame
