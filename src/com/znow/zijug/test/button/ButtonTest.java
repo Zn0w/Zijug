@@ -73,7 +73,7 @@ private long window;
 		Window testingWindow = new Window(window);
 		
 		Button helloButton = new Button("Hello Button!");
-		helloButton.addActionHandler(new HelloHandler());
+		helloButton.addActionHandler(new HelloHandler(), window);
 		
 		testingWindow.add(helloButton);
 		glfwSetKeyCallback(window, keyboardHandler);

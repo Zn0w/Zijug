@@ -1,6 +1,12 @@
 package com.znow.zijug.main.component.button;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.stackPush;
+
+import java.nio.DoubleBuffer;
+
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.MemoryStack;
 
 import com.znow.zijug.main.component.Component;
 
@@ -8,6 +14,7 @@ public class Button extends Component {
 
 	private String title;
 	private ActionHandler actionHandler;
+	private long glfwWindow;
 	
 	public Button(String title) {
 		super(35, 25);
@@ -37,7 +44,12 @@ public class Button extends Component {
 	}
 	
 	private boolean isClicked() {
-		return true;
+		MemoryStack stack = stackPush();
+		DoubleBuffer xpos = stack.mallocDouble(1);
+		DoubleBuffer ypos = stack.mallocDouble(1);
+		GLFW.glfwGetCursorPos(glfwWindow, xpos, ypos);
+		
+		return (x <= xpos.get(0) && x + width >= xpos.get(0)) && (y <= ypos.get(0) && y + height >= ypos.get(0));
 	}
 	
 	public void setTitle(String title) {
@@ -48,8 +60,9 @@ public class Button extends Component {
 		return title;
 	}
 	
-	public void addActionHandler(ActionHandler actionHandler) {
+	public void addActionHandler(ActionHandler actionHandler, long glfwWindow) {
 		this.actionHandler = actionHandler;
+		this.glfwWindow = glfwWindow;
 	}
 	
 }
