@@ -18,6 +18,7 @@ import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
@@ -32,21 +33,24 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 import java.nio.IntBuffer;
 
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 
+import com.znow.zijug.glfw_input.CursorHandler;
+import com.znow.zijug.glfw_input.KeyboardHandler;
 import com.znow.zijug.main.component.button.ActionHandler;
 import com.znow.zijug.main.component.button.Button;
 import com.znow.zijug.main.container.Window;
-import com.znow.zijug.test.KeyboardHandler;
 
 public class ButtonTest {
 	
 private long window;
 	
 	private GLFWKeyCallback keyboardHandler = new KeyboardHandler();
+	private GLFWCursorPosCallback cursorHandler = new CursorHandler();
 	
 	public static void main(String[] args) {
 		new ButtonTest().run();
@@ -113,6 +117,8 @@ private long window;
 			if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		});
+		
+		glfwSetCursorPosCallback(window, cursorHandler = new CursorHandler());
 
 		// Get the thread stack and push a new frame
 		try ( MemoryStack stack = stackPush() ) {

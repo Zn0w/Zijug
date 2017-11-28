@@ -1,4 +1,4 @@
-package com.znow.zijug.test;
+package com.znow.zijug.glfw_input;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
