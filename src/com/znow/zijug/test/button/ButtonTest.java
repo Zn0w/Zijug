@@ -18,7 +18,7 @@ import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
@@ -36,21 +36,21 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.system.MemoryStack;
 
 import com.znow.zijug.glfw_input.CursorHandler;
 import com.znow.zijug.glfw_input.KeyboardHandler;
+import com.znow.zijug.glfw_input.MouseButtonHandler;
 import com.znow.zijug.main.component.button.ActionHandler;
 import com.znow.zijug.main.component.button.Button;
 import com.znow.zijug.main.container.Window;
 
 public class ButtonTest {
 	
-private long window;
-	
-	private GLFWKeyCallback keyboardHandler = new KeyboardHandler();
-	private GLFWCursorPosCallback cursorHandler = new CursorHandler();
+	private long window;
+	private GLFWMouseButtonCallback mouseButtonHandler;
 	
 	public static void main(String[] args) {
 		new ButtonTest().run();
@@ -76,7 +76,6 @@ private long window;
 		helloButton.addActionHandler(new HelloHandler(), window);
 		
 		testingWindow.add(helloButton);
-		glfwSetKeyCallback(window, keyboardHandler);
 
 		while ( !glfwWindowShouldClose(window) ) {
 			testingWindow.update();
@@ -118,8 +117,8 @@ private long window;
 				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		});
 		
-		glfwSetCursorPosCallback(window, cursorHandler = new CursorHandler());
-
+		glfwSetMouseButtonCallback(window, mouseButtonHandler = new MouseButtonHandler());
+		
 		// Get the thread stack and push a new frame
 		try ( MemoryStack stack = stackPush() ) {
 			IntBuffer pWidth = stack.mallocInt(1); // int*
