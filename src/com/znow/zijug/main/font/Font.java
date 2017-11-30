@@ -1,5 +1,9 @@
 package com.znow.zijug.main.font;
 
-public class Font {
+import java.util.HashMap;
 
+public class Font {
+	
+	private HashMap<Character, Glyph> glyphs;
+	
 }
